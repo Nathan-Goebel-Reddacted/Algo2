@@ -1,0 +1,72 @@
+2 - Stratégie gloutonne
+
+
+
+3 - Récurrence et récursivité naïve{
+    Soit n le nombre d'emplacements. 
+    Pour 0≤i≤n−1 on définit V[i] comme étant la somme maximale que l’on peut collecter entres les emplacements d’indices i et n−1(inclus).
+    Établir une formule de récurrence portant sur V[i].Justifier précisément son raisonnement.
+},{
+    on rappel un algo naif(ou brute force) cherche toutes les possibiliter
+    dans ce jeux a chaque tour on a le choix de visiter un emplacement(True) ou de le passée(False)
+    comme on execute toute les possibiliter pour voir le score maximal on as pas besoin de refflechir au symbole
+    comme on utilisera la recurtion le plus simple est d'iterré sur chaque tour
+
+    T[i] = gain brut sur la case i
+    C[i] = symbole de la case i
+    A et B = multiplicateurs selon le symbole précédent
+    V[i] = gain max possible depuis la case i
+    prev = le symbole de la dernière case visitée (ou None si aucune)
+
+    FONCTION BruteForce(turns):
+        SI longueur(turns) == longueur(T):     si la partie est finie
+            score ← CalculerScore(turns)       on joue la partie pour r'avoir le score
+            RETOURNER (score, turns)           on retourne le score et les choix effectuer
+
+        Cas 1 : On visite cet emplacement
+        (scoreTrue, pathTrue) ← BruteForce(turns + [True])
+
+        Cas 2 : On saute cet emplacement
+        (scoreFalse, pathFalse) ← BruteForce(turns + [False])
+
+        // On garde le meilleur des deux
+        SI scoreTrue > scoreFalse ALORS
+            RETOURNER (scoreTrue, pathTrue)
+        SINON
+            RETOURNER (scoreFalse, pathFalse)
+
+
+    (scoreMax, cheminOptimal) ← BruteForce([]) 1er iterration
+    AFFICHER "Score max :", scoreMax
+    AFFICHER "Chemin optimal :", cheminOptimal
+
+    donc la formule devrai etre:
+        V(i, s) = max(
+            V(i + 1, s)       ,on saute la case i,la prochaine occurence
+            
+            (                 ,et on visite la case i  
+            si C[i] = s       ,même symbole
+                A × T[i]
+            sinon             ,symbole different 
+                B × T[i] 
+            ) + V(i + 1, C[i]) la prochaine occurence
+        )
+
+        en condencer,
+        V(i, s) = max(
+            V(i + 1, s),                                      
+            (A × T[i] si C[i] = s sinon B × T[i])  +  V(i + 1, C[i])
+        )
+
+        comme on cherche a calculer tout les score possible
+        alors on as 2 possibiliter par emplacement n donc 
+        2^n possibiliter tester ce qui correspond a une complexiter exponenciel
+}
+
+4.1 - Approche Top Down{
+
+}
+
+4.2 - Approche Bottom Up{
+
+}

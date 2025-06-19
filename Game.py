@@ -23,7 +23,6 @@ class Game:
         return self.location
 
     def NextLocation(self):
-        #verifie si dans les limite
         if self.location >= len(self.T) - 1:
             return None
         
@@ -52,20 +51,27 @@ class Game:
     def GetC(self):
         return self.C
 
-    def GetScore(self):
+    def PrintScore(self):
         print(f"Résultat = {self.score}")
 
+    def GetScore(self):
+        return self.score
+
     def AutoPlay(self, Turn):
+        self.reset()
         if not isinstance(Turn, (list, tuple)) or not all(isinstance(turn, bool) for turn in Turn):
             raise TypeError("AutoPlay attend une liste de booléens (True/False) pour chaque emplacement.")
-        if len(Turn) != len(self.C):
-            raise ValueError("La longueur de Turn doit être égale à celle des emplacements.")
+        if len(Turn) > len(self.C):
+            raise ValueError("La longueur de Turn doit être inferieur ou égale à celle des emplacements.")
 
         for turn in Turn:
             if turn:
                 self.Visite()
             else:
                 self.NextLocation()
+        
+        return self.GetScore
+            
 
     def reset(self):
         self.LastChoice = -1
