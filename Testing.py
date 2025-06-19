@@ -15,6 +15,14 @@ def testManuel(game):
 
     print(f"Manuel Temps d'exécution : {duration:.6f} secondes")
 
+def testGlouton(game):
+    start = time.perf_counter()
+    Glouton(game)
+    end = time.perf_counter()
+    duration = end - start
+
+    print(f"Glouton Temps d'exécution : {duration:.6f} secondes")
+
 def testNaif(game):
     start = time.perf_counter()
     Naif(game)
@@ -22,10 +30,19 @@ def testNaif(game):
     duration = end - start
 
     print(f"Naif Temps d'exécution : {duration:.6f} secondes")
-    #sur mon ordi temps moyent 
+
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     Test1=Game([9,7,8,7,10,7],[2,1,1,4,4,2],-2,5)
     #resultat attendue 170pt avec Path = [0, 2, 4, 5]
-    testManuel(Test1) #temps= .000 055 s
-    testNaif(Test1)#temps= .000 172 s  chemin trouver
+    testManuel(Test1)   #temps= .000 077 s
+    testGlouton(Test1)  #temps= .000 113 s
+    testNaif(Test1)     #temps= .000 251 s  chemin optimal trouver

@@ -1,4 +1,47 @@
-2 - Stratégie gloutonne
+2 - Stratégie gloutonne{
+    Proposer et implémenter en Python une stratégie gloutonne afin de résoudre ce problème.
+    Cette fonction retournera le montant accumulé à l’issue du parcours, ainsi qu’une liste constituée des indices des emplacements visités.
+    Cette stratégie est-elle optimale ? On justifiera sa réponse en proposant une démonstration ou un contre-exemple selon la réponse apportée.
+},{
+    Rappel Glouton = prendre le chemin optimal localement (mais pas reflechir a la suite)
+
+    FONCTION Glouton(T, C, A, B):
+        score ← 0
+        symbole_precedent ← AUCUN
+        chemin ← liste vide
+
+        POUR i allant de 0 à longueur(T) - 1:   pour chaque tour de jeu
+            symbole_actuel ← C[i]
+            valeur ← T[i]
+
+            SI symbole_precedent ≠ AUCUN ET symbole_actuel = symbole_precedent:    calculer le score theorique
+                gain ← A × valeur
+            SINON:
+                gain ← B × valeur
+
+            SI gain > 0:                 si visiter nous fait gagner au score alors on visite
+                score ← score + gain
+                symbole_precedent ← symbole_actuel
+                ajouter i à chemin
+
+        RETOURNER (score, chemin)
+
+    Ce jeu repose en grande partie sur l’anticipation : 
+    il peut être judicieux de perdre quelques points au départ pour ensuite enchaîner des gains bien plus importants grâce à des multiplicateurs favorables.
+    La stratégie gloutonne, qui ne considère que le gain immédiat, est donc sous-optimale dans ce type de situation.
+    T = [5, 5, 5, 5, 5, 5]  C = [1, 1, 1, 1, 1, 1]  A = 5  B = -1
+    Cet exemple volontairement simplifié montre une situation où le joueur a tout intérêt à visiter tous les emplacements :
+        Premier tour : on perd 5 × -1 = -5
+        Puis à chaque tour suivant : on gagne 5 × 5 = 25
+        Score total :
+        -5 + 25 + 25 + 25 + 25 + 25 = 120
+        
+    Pourtant, le glouton raisonne ainsi :
+        “Visiter l’emplacement 0 me fait perdre 5 points”
+        “Je préfère ne rien faire”
+    Résultat : il passe toutes les cases et termine avec un score de 0 au lieu de 120.
+    Ce contre-exemple prouve que la stratégie gloutonne n’est pas fiable dans ce contexte.
+}
 
 
 

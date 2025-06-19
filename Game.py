@@ -15,7 +15,7 @@ class Game:
         self.C = C
         self.A = A
         self.B = B
-        self.LastChoice = -1
+        self.LastChoice = None
         self.location = 0
         self.score = 0
 
@@ -50,6 +50,15 @@ class Game:
 
     def GetC(self):
         return self.C
+    
+    def GetA(self):
+        return self.A
+
+    def GetB(self):
+        return self.B
+
+    def GetLastChoice(Self):
+        return Self.LastChoice
 
     def PrintScore(self):
         print(f"Résultat = {self.score}")
@@ -74,7 +83,7 @@ class Game:
             
 
     def reset(self):
-        self.LastChoice = -1
+        self.LastChoice = None
         self.location = 0
         self.score = 0
 
