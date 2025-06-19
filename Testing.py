@@ -28,4 +28,4 @@ if __name__ == "__main__":
     Test1=Game([9,7,8,7,10,7],[2,1,1,4,4,2],-2,5)
     #resultat attendue 170pt avec Path = [0, 2, 4, 5]
     testManuel(Test1) #temps= .000 055 s
-    testNaif(Test1)#temps= .000 172 s
+    testNaif(Test1)#temps= .000 172 s  chemin trouver
