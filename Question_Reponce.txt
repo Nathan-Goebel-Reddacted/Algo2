@@ -18,16 +18,16 @@
     V[i] = gain max possible depuis la case i
     prev = le symbole de la dernière case visitée (ou None si aucune)
 
-    FONCTION BruteForce(turns):
-        SI longueur(turns) == longueur(T):     si la partie est finie
-            score ← CalculerScore(turns)       on joue la partie pour r'avoir le score
-            RETOURNER (score, turns)           on retourne le score et les choix effectuer
+    FONCTION BruteForce(path):
+        SI longueur(path) == longueur(T):     si la partie est finie
+            score ← CalculerScore(path)       on joue la partie pour r'avoir le score
+            RETOURNER (score, path)           on retourne le score et les choix effectuer
 
         Cas 1 : On visite cet emplacement
-        (scoreTrue, pathTrue) ← BruteForce(turns + [True])
+        (scoreTrue, pathTrue) ← BruteForce(path + [True])
 
         Cas 2 : On saute cet emplacement
-        (scoreFalse, pathFalse) ← BruteForce(turns + [False])
+        (scoreFalse, pathFalse) ← BruteForce(path + [False])
 
         // On garde le meilleur des deux
         SI scoreTrue > scoreFalse ALORS

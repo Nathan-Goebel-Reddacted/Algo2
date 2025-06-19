@@ -70,7 +70,7 @@ class Game:
             else:
                 self.NextLocation()
         
-        return self.GetScore
+        return self.GetScore()
             
 
     def reset(self):
@@ -79,4 +79,10 @@ class Game:
         self.score = 0
 
 
-    
+def ConvertPath(BoolPath):
+    path = []
+    for index, value in enumerate(BoolPath):
+        if value:
+            path.append(index)
+    return path
+
