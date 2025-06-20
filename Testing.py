@@ -1,8 +1,8 @@
 from Game import Game
 from Glouton import Glouton
 from Naif import Naif
-from Bottom_up import Bottom_up
 from Top_down import Top_down
+from Bottom_up import Bottom_up
 import time
 import os
 
@@ -46,6 +46,20 @@ def convertFile(filename):
     
     return [T,C]
 
+def testTopDown(game):
+    start = time.perf_counter()
+    Top_down(game)
+    end = time.perf_counter()
+    duration = end - start
+    print(f"TopDown Temps d'exécution : {duration:.6f} secondes")
+
+def testBottomUp(game):
+    start = time.perf_counter()
+    Bottom_up(game)
+    end = time.perf_counter()
+    duration = end - start
+    print(f"BottomUp Temps d'exécution : {duration:.6f} secondes")
+
 if __name__ == "__main__":
     print("Test 1")
     Test1=Game([9,7,8,7,10,7],[2,1,1,4,4,2],-2,5)
@@ -53,6 +67,8 @@ if __name__ == "__main__":
     testManuel(Test1,[True,False,True,False,True,True])
     testGlouton(Test1)
     testNaif(Test1) 
+    testTopDown(Test1)
+    testBottomUp(Test1)
 
     print("Test 2")
     Test2=Game([3,9,2,7,3,1],[2,2,5,4,2,1],2,-5)
@@ -60,6 +76,8 @@ if __name__ == "__main__":
     testManuel(Test2,[True,True,False,False,True,False])
     testGlouton(Test2)
     testNaif(Test2)
+    testTopDown(Test2)
+    testBottomUp(Test2)
 
     print("Test MP.txt")
     T,C=convertFile("MP.txt")
