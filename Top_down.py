@@ -1,4 +1,3 @@
-# Top_down.py  — version pas-à-pas
 from Game import Game as GameClass
 from Game import ConvertPath
 
