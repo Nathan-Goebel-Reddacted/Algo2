@@ -4,11 +4,11 @@ from Naif import Naif
 from Bottom_up import Bottom_up
 from Top_down import Top_down
 import time
+import os
 
-
-def testManuel(game):
+def testManuel(game,path):
     start = time.perf_counter()
-    game.AutoPlay([True,False,True,False,True,True])
+    game.AutoPlay(path)
     game.PrintScore()
     end = time.perf_counter()
     duration = end - start
@@ -31,18 +31,38 @@ def testNaif(game):
 
     print(f"Naif Temps d'exécution : {duration:.6f} secondes")
 
+def convertFile(filename):
+    current_dir = os.path.dirname(__file__)
+    full_path = os.path.join(current_dir, filename)
+    T = []
+    C = []
 
-
-
-
-
-
-
-
+    with open(full_path, "r") as f:
+        for line in f:
+            if line.strip():
+                t_val, c_val = map(int, line.strip().split())
+                T.append(t_val)
+                C.append(c_val)
+    
+    return [T,C]
 
 if __name__ == "__main__":
+    print("Test 1")
     Test1=Game([9,7,8,7,10,7],[2,1,1,4,4,2],-2,5)
     #resultat attendue 170pt avec Path = [0, 2, 4, 5]
-    testManuel(Test1)   #temps= .000 077 s
-    testGlouton(Test1)  #temps= .000 113 s
-    testNaif(Test1)     #temps= .000 251 s  chemin optimal trouver
+    testManuel(Test1,[True,False,True,False,True,True])
+    testGlouton(Test1)
+    testNaif(Test1) 
+
+    print("Test 2")
+    Test2=Game([3,9,2,7,3,1],[2,2,5,4,2,1],2,-5)
+    #resultat attendue 9pt avec Path = [0, 1, 4]
+    testManuel(Test2,[True,True,False,False,True,False])
+    testGlouton(Test2)
+    testNaif(Test2)
+
+    print("Test MP.txt")
+    T,C=convertFile("MP.txt")
+    Test3=Game(T,C,-3,7)
+    #testGlouton(Test3)
+    #testNaif(Test3)       # crash car maximum recursion depth exceeded(normal dans le cas d'un algo naif)
