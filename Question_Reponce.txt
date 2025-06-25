@@ -106,10 +106,52 @@
         2^n possibiliter tester ce qui correspond a une complexiter exponenciel
 }
 
-4.1 - Approche Top Down{
+4.1 - Approche Top Down
 
-}
+On rappelle que l'approche top down consiste à chaque position de choisir entre visiter ou sauter l'emplacement
+On appelle ensuite d emanière récursive la suite pour connaitre la meilleure decision
+On mémorise les résultats pour pas le refaire 2 fois
 
-4.2 - Approche Bottom Up{
+On cherche donc avec cet algo a trouver le score max possible à partir de i, en tenant compte du dernier symbole visité car il infleunce le gain
 
-}
+La fonction est dp(i, last_symbol) donc determine par 2 chose :
+- i : position actuelle entre 0 et n
+- last_symbol : dernier symbole visité (none ou C(i))
+
+Il y a n positions possible
+Il y a au maximum k symboles different dans C 
+Donc nombre total d'états different : n x k 
+
+A chaque appel on fait : 
+- un calcul de gain simple
+- 2 appels récursifs avec le cas ou on saute et celui ou on visite
+- un max() pour choisir meilleure score
+- on stocke résultat 
+Chaque etat prend donc un temps constant O(1)
+
+Tp total = nb d'état X tp par etat 
+On visite chaque état une seule fois donc O(n X k)
+
+Si K petit alors quasiement linéaire
+Si K avec tous different, complexité quadratique O(n²)
+
+4.2 - Approche Bottom Up
+
+L'approche est ici de construire la solution de gauche à droite etape par etape
+On part d'un etat [(None, 0, [])]
+A chaque case i soit on visite pas soit on visite en appliquant multiplicateur selon dernier symbole visité 
+On garde à chaque étape le meilleur score possible pour chaque combinaison de symbole précédent
+
+On garde donc à chaque tour une liste (symbole_precedent, score, path_booleen)
+On garde un seul meilleur chemin par symbole précedent à chaque étape 
+
+Il y a n étapes de mise a jour
+On garde max un chemin par last_symbol donc nb d'état a chaque tour est = au nb de symboles distincts k
+
+A chaque tour i, pour chaque etat courant (symbole, score, path) on : 
+- calcule 2 chemins : saute ou visite
+- génére 2 X k nouveaux états
+- on filtre pour garder que meilleur chemin pour chaque symbole
+
+Temps constant par état donc O(k)
+Donc complexité total O(n x k) comme top down
