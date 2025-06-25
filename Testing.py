@@ -6,6 +6,7 @@ from Bottom_up import Bottom_up
 import time
 import os
 
+
 def testManuel(game,path):
     start = time.perf_counter()
     game.AutoPlay(path)
@@ -82,5 +83,7 @@ if __name__ == "__main__":
     print("Test MP.txt")
     T,C=convertFile("MP.txt")
     Test3=Game(T,C,-3,7)
-    #testGlouton(Test3)
-    #testNaif(Test3)       # crash car maximum recursion depth exceeded(normal dans le cas d'un algo naif)
+    testGlouton(Test3)
+    #testNaif(Test3) # crash car maximum recursion depth exceeded(normal dans le cas d'un algo naif)
+    #testTopDown(Test3)
+    testBottomUp(Test3)      
