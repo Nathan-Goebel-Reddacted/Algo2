@@ -63,27 +63,47 @@ def testBottomUp(game):
 
 if __name__ == "__main__":
     print("Test 1")
+    print("******")
     Test1=Game([9,7,8,7,10,7],[2,1,1,4,4,2],-2,5)
     #resultat attendue 170pt avec Path = [0, 2, 4, 5]
     testManuel(Test1,[True,False,True,False,True,True])
+    print("******")
     testGlouton(Test1)
+    print("******")
     testNaif(Test1) 
+    print("******")
     testTopDown(Test1)
+    print("******")
     testBottomUp(Test1)
 
+    print()
+    print("------------------------------------------------")
+    print()
+
     print("Test 2")
+    print("******")
     Test2=Game([3,9,2,7,3,1],[2,2,5,4,2,1],2,-5)
     #resultat attendue 9pt avec Path = [0, 1, 4]
     testManuel(Test2,[True,True,False,False,True,False])
+    print("******")
     testGlouton(Test2)
+    print("******")
     testNaif(Test2)
+    print("******")
     testTopDown(Test2)
+    print("******")
     testBottomUp(Test2)
 
+    print()
+    print("------------------------------------------------")
+    print()
+
     print("Test MP.txt")
+    print("******")
     T,C=convertFile("MP.txt")
     Test3=Game(T,C,-3,7)
     testGlouton(Test3)
-    #testNaif(Test3) # crash car maximum recursion depth exceeded(normal dans le cas d'un algo naif)
-    #testTopDown(Test3)
+    print("******")
+    #testNaif(Test3) 
+    #testTopDown(Test3) #on ne fait pas les 2 car crash, ne sont pas conçus pour
     testBottomUp(Test3)      
